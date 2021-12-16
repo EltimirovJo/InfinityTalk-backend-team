@@ -21,20 +21,27 @@ module.exports.usersController = {
       res.json(e);
     }
   },
+    
   registerUser: async (req, res) => {
     try {
-      const { login, password } = req.body;
+      const { login, name, email, img, password } = req.body;
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
 
-      const user = await User.create({ login: login, password: hash });
+      const user = await User.create({
+        login: login,
+        name: name,
+        email: email,
+        img: img,
+        password: hash,
+      });
 
       res.json(user);
     } catch (e) {
       return res.status(400).json({
-        error: 'Ошибка при регистрации.',
+        error: 'Ошибка при регистрации.' + e,
       });
     }
   },
@@ -64,7 +71,7 @@ module.exports.usersController = {
       });
       res.json({
         token,
-        userId: user._id
+        userId: user._id,
       });
     } catch (e) {
       res.json(e);

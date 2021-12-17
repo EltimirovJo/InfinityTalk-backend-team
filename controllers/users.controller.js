@@ -11,6 +11,17 @@ module.exports.usersController = {
       res.json(e);
     }
   },
+  updateImg: async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(req.params.id, {
+        img: req.file.path
+      });
+      res.status(200).json('update');
+    } catch (e) {
+      res.json(e);
+    }
+  },
+    
   registerUser: async (req, res) => {
     try {
       const { login, name, email, img, password } = req.body;

@@ -9,15 +9,22 @@ const userSchema = mongoose.Schema(
     name: {
       type: String,
     },
+    surname: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
     email: {
       type: String,
-      unique: true,
     },
     password: {
       type: String,
     },
     img: {
       type: String,
+      default: "../uploads/blank-profile-picture-973460_1280.png"
+
       default: null,
     },
     defaultLanguage: {

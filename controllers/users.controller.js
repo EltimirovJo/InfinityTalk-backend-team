@@ -1,4 +1,5 @@
 const User = require('../models/User.model');
+const Language = require('../models/Language.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -15,6 +16,7 @@ module.exports.usersController = {
     try {
       await User.findByIdAndUpdate(req.user.id, {
         img: req.file.path
+
       });
       res.status(200).json(req.file.path);
     } catch (e) {
@@ -24,7 +26,15 @@ module.exports.usersController = {
 
   registerUser: async (req, res) => {
     try {
-      const { login, name, email, img, password } = req.body;
+      const {
+        login,
+        name,
+        email,
+        img,
+        password,
+        defaultLanguage,
+        learnLanguage,
+      } = req.body;
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
@@ -36,6 +46,8 @@ module.exports.usersController = {
         email: email,
         img: img,
         password: hash,
+        defaultLanguage: defaultLanguage,
+        learnLanguage: learnLanguage,
       });
 
       res.json(user);

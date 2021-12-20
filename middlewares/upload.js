@@ -8,22 +8,20 @@ const storage = multer.diskStorage({
   filename: function (req, file, cb) {
     let ext = path.extname(file.originalname);
     cb(null, Date.now() + ext);
-  }
+  },
 });
 
 const upload = multer({
   storage: storage,
   fileFilter: function (req, file, callback) {
-    if (
-      file.mimetype = 'image/png' || 'image/jpg'
-    ) {
+    if ((file.mimetype = 'image/png' || 'image/jpg')) {
       callback(null, true);
     } else {
       console.log('only png & jpg files are can be uploaded');
       callback(null, false);
     }
   },
-  limits: 1024 * 1024 * 2
+  limits: 1024 * 1024 * 2,
 });
 
 module.exports = upload;

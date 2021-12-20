@@ -1,4 +1,5 @@
 const User = require('../models/User.model');
+const Language = require('../models/Language.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -13,18 +14,26 @@ module.exports.usersController = {
   },
   updateImg: async (req, res) => {
     try {
-      await User.findByIdAndUpdate(req.params.id, {
+      await User.findByIdAndUpdate(req.user.id, {
         img: req.file.path
+
       });
-      res.status(200).json('update');
+      res.status(200).json(req.file.path);
     } catch (e) {
       res.json(e);
     }
   },
+
   registerUser: async (req, res) => {
     try {
       const {
-        login, name, email, img, password
+        login,
+        name,
+        email,
+        img,
+        password,
+        defaultLanguage,
+        learnLanguage,
       } = req.body;
       const hash = await bcrypt.hash(
         password,
@@ -37,6 +46,8 @@ module.exports.usersController = {
         email: email,
         img: img,
         password: hash,
+        defaultLanguage: defaultLanguage,
+        learnLanguage: learnLanguage,
       });
 
       res.json(user);
@@ -78,4 +89,27 @@ module.exports.usersController = {
       res.json(e);
     }
   },
+  getOneUser: async (req, res) => {
+    try {
+      const id = req.user.id;
+
+      const user = await User.findById(id);
+      res.json(user);
+
+    } catch (e) {
+      console.log(e.message)
+    }
+  },
+  editUserInfo: async (req, res) => {
+    try {
+      await User.findByIdAndUpdate(req.user.id, {
+       $set: req.body
+      });
+      const user = await User.findById(req.user.id);
+
+      res.status(200).json(user);
+    } catch (e) {
+      console.log(e)
+    }
+  }
 };

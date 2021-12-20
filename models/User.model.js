@@ -23,19 +23,19 @@ const userSchema = mongoose.Schema(
     },
     img: {
       type: String,
-      default: 'uploads/default-photo.png'
+      default: 'uploads/default-photo.png',
     },
     description: {
-      type: String
+      type: String,
     },
     instagram: {
-      type: String
+      type: String,
     },
     whatsapp: {
-      type: String
+      type: String,
     },
     telegram: {
-      type: String
+      type: String,
     },
     defaultLanguage: {
       type: mongoose.SchemaTypes.ObjectId,

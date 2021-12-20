@@ -9,16 +9,18 @@ const userSchema = mongoose.Schema(
     name: {
       type: String,
     },
+    surname: {
+      type: String,
+    },
     email: {
       type: String,
-      unique: true,
     },
     password: {
       type: String,
     },
     img: {
       type: String,
-      default: null
+      default: "../uploads/blank-profile-picture-973460_1280.png"
     },
   },
   { timestamps: true }

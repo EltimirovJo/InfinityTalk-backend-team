@@ -23,9 +23,19 @@ const userSchema = mongoose.Schema(
     },
     img: {
       type: String,
-      default: "../uploads/blank-profile-picture-973460_1280.png"
-
-      default: null,
+      default: 'uploads/default-photo.png',
+    },
+    description: {
+      type: String,
+    },
+    instagram: {
+      type: String,
+    },
+    whatsapp: {
+      type: String,
+    },
+    telegram: {
+      type: String,
     },
     defaultLanguage: {
       type: mongoose.SchemaTypes.ObjectId,

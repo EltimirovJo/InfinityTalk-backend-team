@@ -12,18 +12,29 @@ const userSchema = mongoose.Schema(
     surname: {
       type: String,
     },
-    phone: {
-      type: String,
-    },
     email: {
       type: String,
+      unique: true,
+      sparse: true,
     },
     password: {
       type: String,
     },
     img: {
       type: String,
-      default: '../uploads/blank-profile-picture-973460_1280.png',
+      default: 'uploads/default-photo.png',
+    },
+    description: {
+      type: String,
+    },
+    instagram: {
+      type: String,
+    },
+    whatsapp: {
+      type: String,
+    },
+    telegram: {
+      type: String,
     },
     defaultLanguage: {
       type: mongoose.SchemaTypes.ObjectId,

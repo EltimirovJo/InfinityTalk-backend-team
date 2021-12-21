@@ -22,7 +22,7 @@ const userSchema = mongoose.Schema(
     },
     img: {
       type: String,
-      default: 'uploads/default-photo.png',
+      default: null,
     },
     description: {
       type: String,

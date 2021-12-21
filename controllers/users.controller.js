@@ -15,8 +15,7 @@ module.exports.usersController = {
   updateImg: async (req, res) => {
     try {
       await User.findByIdAndUpdate(req.user.id, {
-        img: req.file.path
-
+        img: req.file.path,
       });
       res.status(200).json(req.file.path);
     } catch (e) {
@@ -95,21 +94,20 @@ module.exports.usersController = {
 
       const user = await User.findById(id);
       res.json(user);
-
     } catch (e) {
-      console.log(e.message)
+      console.log(e.message);
     }
   },
   editUserInfo: async (req, res) => {
     try {
+      console.log(req.body);
       await User.findByIdAndUpdate(req.user.id, {
-       $set: req.body
+        $set: { ...req.body },
       });
       const user = await User.findById(req.user.id);
-
       res.status(200).json(user);
     } catch (e) {
-      console.log(e)
+      console.log(e);
     }
-  }
+  },
 };

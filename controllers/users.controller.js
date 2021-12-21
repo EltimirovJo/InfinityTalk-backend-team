@@ -38,7 +38,6 @@ module.exports.usersController = {
         password,
         Number(process.env.BCRYPT_ROUNDS)
       );
-
       const user = await User.create({
         login: login,
         name: name,
@@ -48,7 +47,6 @@ module.exports.usersController = {
         defaultLanguage: defaultLanguage,
         learnLanguage: learnLanguage,
       });
-
       res.json(user);
     } catch (e) {
       return res.status(400).json({

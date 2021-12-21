@@ -98,11 +98,11 @@ module.exports.usersController = {
   },
   editUserInfo: async (req, res) => {
     try {
+      console.log(req.body);
       await User.findByIdAndUpdate(req.user.id, {
-        $set: req.body,
+        $set: { ...req.body },
       });
       const user = await User.findById(req.user.id);
-
       res.status(200).json(user);
     } catch (e) {
       console.log(e);

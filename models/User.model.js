@@ -12,21 +12,21 @@ const userSchema = mongoose.Schema(
     surname: {
       type: String,
     },
-    phone: {
-      type: String,
-    },
     email: {
       type: String,
+      unique: true,
+      sparse: true,
     },
     password: {
       type: String,
     },
     img: {
       type: String,
-      default: 'uploads/default-photo.png',
+      default: null,
     },
     description: {
       type: String,
+      default: 'Заполните поля...'
     },
     instagram: {
       type: String,

@@ -40,11 +40,10 @@ module.exports.usersController = {
       const transporter = nodemailer.createTransport({
         host: 'smtp.mail.ru',
         port: 465,
-        secure: true, // true for 465, false for other ports
+        secure: true,
         auth: {
-          // Пожалуйста, используйте свой собственный аккаунт для рассылки
-          user: 'infinitytalk@inbox.ru', // (замените звездочики на название вашего почтового ящика)
-          pass: '0Xj8QkXv7fkGneQynn41', //  (замените звездочики на пароль вашего почтового ящика)
+          user: 'infinitytalk@inbox.ru',
+          pass: '0Xj8QkXv7fkGneQynn41',
         },
       });
 

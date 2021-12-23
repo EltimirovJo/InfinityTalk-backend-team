@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 module.exports.usersController = {
   getAllUsers: async (req, res) => {
     try {
-      const users = await User.find();
+      const users = await User.find().populate('defaultLanguage').populate('learnLanguage');
       res.json(users);
     } catch (e) {
       res.json(e);

@@ -26,7 +26,6 @@ const userSchema = mongoose.Schema(
     },
     description: {
       type: String,
-      default: 'Заполните поля...'
     },
     instagram: {
       type: String,

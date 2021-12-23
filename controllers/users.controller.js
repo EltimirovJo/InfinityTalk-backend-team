@@ -1,12 +1,14 @@
 const User = require('../models/User.model');
-const Language = require('../models/Language.model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 module.exports.usersController = {
   getAllUsers: async (req, res) => {
     try {
-      const users = await User.find().populate('defaultLanguage').populate('learnLanguage');
+      const users = await User.find()
+        .populate('defaultLanguage')
+        .populate('learnLanguage');
       res.json(users);
     } catch (e) {
       res.json(e);
@@ -34,6 +36,26 @@ module.exports.usersController = {
         defaultLanguage,
         learnLanguage,
       } = req.body;
+
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.mail.ru',
+        port: 465,
+        secure: true, // true for 465, false for other ports
+        auth: {
+          // Пожалуйста, используйте свой собственный аккаунт для рассылки
+          user: 'infinitytalk@inbox.ru', // (замените звездочики на название вашего почтового ящика)
+          pass: '0Xj8QkXv7fkGneQynn41', //  (замените звездочики на пароль вашего почтового ящика)
+        },
+      });
+
+      await transporter.sendMail({
+        from: '"Node js" <infinitytalk@inbox.ru>',
+        to: `${email}`,
+        subject: 'Message from Node js',
+        text: 'This message was sent from Node js server.',
+        html: 'Поздравляю, вы успешно зарегистрировались!',
+      });
+
       const hash = await bcrypt.hash(
         password,
         Number(process.env.BCRYPT_ROUNDS)
@@ -47,6 +69,7 @@ module.exports.usersController = {
         defaultLanguage: defaultLanguage,
         learnLanguage: learnLanguage,
       });
+
       res.json(user);
     } catch (e) {
       return res.status(400).json({

@@ -44,6 +44,10 @@ const userSchema = mongoose.Schema(
       type: mongoose.SchemaTypes.ObjectId,
       ref: 'Language',
     },
+    rating: {
+      type: Number,
+      default: 1
+    }
   },
   { timestamps: true }
 );
